@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#21152d">
+  <title>Cute Ghost | Halloween 3D + AR</title>
+
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: #fff8ff;
+      background: linear-gradient(145deg, #21152d, #694c94, #d9c7ff);
+    }
+
+    main {
+      max-width: 760px;
+      margin: auto;
+    }
+
+    .eyebrow {
+      letter-spacing: 4px;
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(32px, 7vw, 48px);
+      margin: 16px 0;
+    }
+
+    p {
+      line-height: 1.6;
+    }
+
+    .panel {
+      background: white;
+      border-radius: 24px;
+      padding: 10px;
+      overflow: hidden;
+      box-shadow: 0 16px 45px #130b2550;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 60vh;
+      min-height: 360px;
+      max-height: 620px;
+      background: radial-gradient(circle, #fff 0%, #e9e4ff 100%);
+      --poster-color: #eee9ff;
+    }
+
+    .ar-button {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 0;
+      border-radius: 28px;
+      padding: 14px 22px;
+      background: #7650c9;
+      color: white;
+      font-weight: bold;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    button, select {
+      padding: 12px 16px;
+      border-radius: 24px;
+      border: 1px solid #d5c1ff;
+      background: #7650c9;
+      color: white;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    select {
+      max-width: 100%;
+    }
+
+    #status {
+      color: #fff2ff;
+      overflow-wrap: anywhere;
+    }
+
+    .help {
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+<main>
+  <div class="eyebrow">A Halloween 3D experiment</div>
+  <h1>Cute Ghost</h1>
+
+  <p>
+    Meet your little ghost! Explore it in 3D,
+    try its animations, or place it in your room
+    using augmented reality.
+  </p>
+
+  <section class="panel">
+    <model-viewer
+      id="ghost"
+      src="./cute_ghost_-_animated_idle_wave_scared.glb"
+      alt="Cute animated Halloween ghost"
+      camera-controls
+      auto-rotate
+      autoplay
+      animation-name="Idle"
+      camera-orbit="0deg 75deg 2.5m"
+      field-of-view="30deg"
+      ar
+      ar-modes="quick-look webxr scene-viewer"
+      ar-placement="floor"
+      ar-scale="auto"
+      loading="eager"
+      shadow-intensity="1">
+
+      <button slot="ar-button" class="ar-button">
+        View Ghost in AR
+      </button>
+    </model-viewer>
+  </section>
+
+  <div class="controls">
+    <label for="animation">Ghost animation:</label>
+    <select id="animation">
+      <option value="">Loading animations...</option>
+    </select>
+    <button id="play">Play</button>
+    <button id="pause">Pause</button>
+  </div>
+
+  <p id="status" role="status">Loading your ghost...</p>
+
+  <p class="help">
+    On iPhone, open this published page in Safari
+    and tap View Ghost in AR. Follow the on-screen
+    instructions to place the ghost in your surroundings.
+  </p>
+</main>
+
+<script>
+  const ghost = document.getElementById("ghost");
+  const animationSelect = document.getElementById("animation");
+  const status = document.getElementById("status");
+
+  ghost.addEventListener("load", () => {
+    const animations = ghost.availableAnimations;
+
+    animationSelect.innerHTML = "";
+
+    if (animations.length === 0) {
+      const option = document.createElement("option");
+      option.textContent = "No animations found";
+      option.value = "";
+      animationSelect.appendChild(option);
+      status.textContent = "Ghost loaded. No animations were detected.";
+      return;
+    }
+
+    animations.forEach((name) => {
+      const option = document.createElement("option");
+      option.value = name;
+      option.textContent = name;
+      animationSelect.appendChild(option);
+    });
+
+    const preferred =
+      animations.find(name => name.toLowerCase() === "idle") ||
+      animations[0];
+
+    animationSelect.value = preferred;
+    ghost.animationName = preferred;
+    ghost.play();
+
+    status.textContent =
+      "Ghost loaded! Choose an animation to try.";
+  });
+
+  animationSelect.addEventListener("change", () => {
+    if (!animationSelect.value) return;
+
+    ghost.animationName = animationSelect.value;
+    ghost.currentTime = 0;
+    ghost.play();
+    status.textContent =
+      "Playing: " + animationSelect.value;
+  });
+
+  document.getElementById("play").addEventListener("click", () => {
+    ghost.play();
+  });
+
+  document.getElementById("pause").addEventListener("click", () => {
+    ghost.pause();
+  });
+
+  ghost.addEventListener("error", () => {
+    status.textContent =
+      "Could not load the ghost. Check the GLB filename and make sure it is uploaded to the repository root.";
+  });
+</script>
+</body>
+</html>
