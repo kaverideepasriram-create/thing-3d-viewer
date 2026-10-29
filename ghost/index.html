@@ -81,26 +81,17 @@
     Loading your ghost...
   </div>
 
-  <model-viewer
-    id="ghost"
-    src="../cute_ghost.glb"
-    alt="Cute animated Halloween ghost"
-    camera-controls
-    auto-rotate
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    ar-placement="floor"
-    shadow-intensity="1"
-    exposure="1"
-    loading="eager"
-    reveal="auto"
-    interaction-prompt="auto">
-
-    <button class="ar-button" slot="ar-button">
-      View Ghost in AR
-    </button>
-  </model-viewer>
-
+ <model-viewer
+  src="../cute_ghost.glb"
+  ios-src="../cute_ghost.usdz"
+  alt="Cute Halloween ghost"
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+  camera-controls
+  auto-rotate
+  camera-orbit="0deg 70deg 100%"
+  shadow-intensity="1">
+</model-viewer>
   <p class="hint">
     Drag to rotate, use two fingers to zoom,
     or tap View Ghost in AR on a compatible device.
