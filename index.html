@@ -1,1 +1,109 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thing | 3D Viewer</title>
+  <script type="module"
+    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #38235d;
+      background: linear-gradient(135deg, #ffd6ed, #d8e8ff, #e5d5ff);
+      min-height: 100vh;
+      text-align: center;
+      padding: 24px;
+    }
+
+    h1 { color: #7544bd; }
+
+    p { font-size: 17px; }
+
+    .viewer {
+      max-width: 900px;
+      margin: 24px auto;
+      padding: 18px;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 8px 28px #7755a533;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 480px;
+      background: linear-gradient(180deg, #ffffff, #e9f6ff);
+      border-radius: 18px;
+    }
+
+    button {
+      margin: 8px;
+      padding: 13px 22px;
+      border: 0;
+      border-radius: 24px;
+      background: #7952cc;
+      color: white;
+      font-size: 15px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover { background: #57339d; }
+
+    #status {
+      color: #674b8d;
+      overflow-wrap: anywhere;
+    }
+  </style>
+</head>
+<body>
+  <h1>Thing: My 3D Model</h1>
+  <p>Explore Thing in 3D. Drag to rotate and scroll to zoom.</p>
+
+  <div class="viewer">
+    <model-viewer
+      id="model"
+      src="./thing.glb"
+      alt="My Thing 3D model"
+      camera-controls
+      auto-rotate
+      shadow-intensity="1"
+      exposure="1"
+      environment-image="neutral"
+      loading="eager">
+    </model-viewer>
+
+    <p id="status">Loading Thing...</p>
+
+    <button onclick="document.querySelector('#model').cameraOrbit='0deg 75deg 105%'">
+      Reset View
+    </button>
+    <button onclick="document.querySelector('#model').cameraOrbit='0deg 90deg 105%'">
+      Front View
+    </button>
+    <button onclick="document.querySelector('#model').cameraOrbit='0deg 0deg 105%'">
+      Top View
+    </button>
+  </div>
+
+  <script>
+    const model = document.querySelector('#model');
+    const status = document.querySelector('#status');
+
+    model.addEventListener('load', () => {
+      status.textContent = 'Thing loaded successfully!';
+    });
+
+    model.addEventListener('error', () => {
+      status.textContent =
+        'Model failed to load. Check that thing.glb is a valid GLB file.';
+    });
+  </script>
+</body>
+</html>
+
