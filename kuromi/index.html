@@ -36,14 +36,25 @@
   <p>Meet Kuromi in your own space!</p>
 
   <model-viewer
-    src="../halloween-kuromi.glb"
-    alt="Halloween Kuromi 3D model"
-    camera-controls
-    auto-rotate
-    ar
-    ar-modes="webxr scene-viewer quick-look"
-    shadow-intensity="1">
-  </model-viewer>
+  src="../halloween-kuromi.glb"
+  alt="Halloween Kuromi 3D model"
+  camera-controls
+  auto-rotate
+  ar
+  ar-modes="webxr scene-viewer quick-look"
+  ar-placement="floor"
+  shadow-intensity="1"
+  style="width:100%;height:65vh;">
+
+  <button slot="ar-button"
+    style="position:absolute;bottom:16px;left:50%;
+    transform:translateX(-50%);padding:14px 22px;
+    background:#ff70b7;color:#1b1030;border:0;
+    border-radius:24px;font-weight:bold;cursor:pointer;">
+    View Kuromi in AR
+  </button>
+
+</model-viewer>
 
   <p>Drag to rotate, pinch to zoom, or tap the AR icon to try AR.</p>
 </body>
