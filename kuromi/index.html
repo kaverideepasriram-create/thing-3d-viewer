@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Halloween Kuromi AR</title>
+  <title>Kuromi AR</title>
 
   <script type="module"
     src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
@@ -17,11 +17,10 @@
 
     body {
       margin: 0;
-      min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(145deg, #28113f, #54266e, #160c20);
-      color: white;
       text-align: center;
+      color: white;
+      background: linear-gradient(145deg, #28113f, #54266e, #160c20);
     }
 
     header {
@@ -29,14 +28,8 @@
     }
 
     h1 {
-      font-size: 32px;
-      margin: 8px 0;
       color: #ff65b5;
-    }
-
-    p {
-      color: #eadcf5;
-      padding: 0 16px;
+      font-size: 32px;
     }
 
     model-viewer {
@@ -52,44 +45,36 @@
       color: #291038;
       border: none;
       border-radius: 28px;
-      padding: 16px 26px;
+      padding: 16px 24px;
       font-size: 17px;
       font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 4px 15px rgba(255, 101, 181, 0.4);
     }
 
-    .hint {
+    #status {
+      padding: 10px;
+      color: #eadcf5;
       font-size: 14px;
-      line-height: 1.6;
-      padding: 0 18px 24px;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Halloween Kuromi</h1>
+    <h1>Kuromi AR</h1>
     <p>Bring Kuromi into your world!</p>
   </header>
 
   <model-viewer
     id="kuromi"
     src="../kuromi_from_onegai_my_melody%20(1).glb"
-    alt="Kuromi 3D character"
+    alt="Kuromi 3D model"
     camera-controls
-    touch-action="pan-y"
     auto-rotate
-    rotation-per-second="15deg"
-    camera-target="auto auto auto"
-    camera-orbit="0deg 75deg auto"
-    field-of-view="30deg"
     shadow-intensity="1"
     exposure="1"
     ar
     ar-modes="quick-look webxr scene-viewer"
-    ar-scale="auto"
-    ar-placement="floor">
+    ar-scale="auto">
 
     <button slot="ar-button" class="ar-button">
       View Kuromi in AR
@@ -97,9 +82,20 @@
 
   </model-viewer>
 
-  <p class="hint">
-    Drag to rotate and pinch to zoom.
-    Tap View Kuromi in AR to place her in your room.
-  </p>
+  <p id="status">Loading Kuromi...</p>
+
+  <script>
+    const model = document.getElementById("kuromi");
+    const status = document.getElementById("status");
+
+    model.addEventListener("load", () => {
+      status.textContent = "Kuromi loaded successfully!";
+    });
+
+    model.addEventListener("error", () => {
+      status.textContent =
+        "Kuromi could not load. Check the filename and file path.";
+    });
+  </script>
 </body>
 </html>
