@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Halloween Pumpkin AR</title>
+
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+  </script>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(160deg, #241000, #9b4314, #180d20);
+    }
+
+    h1 {
+      padding-top: 24px;
+    }
+
+    p {
+      padding: 0 18px;
+      color: #ffe0b5;
+    }
+
+    model-viewer {
+      width: 100%;
+      height: 65vh;
+      background: transparent;
+    }
+
+    .ar-button {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 22px;
+      background: #ffb347;
+      color: #241000;
+      border: 0;
+      border-radius: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Halloween Pumpkin</h1>
+  <p>Bring a little Halloween magic into your space!</p>
+
+  <model-viewer
+    src="../halloween-pumpkin.glb"
+    alt="Halloween pumpkin 3D model"
+    camera-controls
+    auto-rotate
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    ar-placement="floor"
+    shadow-intensity="1">
+
+    <button class="ar-button" slot="ar-button">
+      View Pumpkin in AR
+    </button>
+
+  </model-viewer>
+
+  <p>Drag to rotate, zoom to explore, or try AR on a compatible device.</p>
+</body>
+</html>
