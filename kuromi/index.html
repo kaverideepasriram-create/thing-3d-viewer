@@ -3,8 +3,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kuromi AR</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Halloween Kuromi AR</title>
 
   <script type="module"
     src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
@@ -18,81 +19,74 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #f7e8ff, #e8ddff);
-      color: #38234b;
+      background: linear-gradient(145deg, #28113f, #54266e, #160c20);
+      color: white;
       text-align: center;
     }
 
     header {
-      padding: 22px 12px 8px;
+      padding: 24px 12px 10px;
     }
 
     h1 {
-      margin: 0;
       font-size: 32px;
+      margin: 8px 0 14px;
     }
 
     p {
-      padding: 0 15px;
+      color: #eadcf5;
+      padding: 0 16px;
     }
 
     model-viewer {
+      display: block;
       width: 100%;
       height: 65vh;
-      min-height: 350px;
-      background: transparent;
+      min-height: 380px;
       --poster-color: transparent;
+    }
+
+    .ar-button {
+      background: #ff65b5;
+      color: #291038;
+      border: none;
+      border-radius: 28px;
+      padding: 17px 26px;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 12px;
+      cursor: pointer;
     }
 
     .hint {
       font-size: 14px;
-      margin: 5px 12px 18px;
-    }
-
-    .ar-button {
-      background: #6e3d9c;
-      color: white;
-      border: none;
-      border-radius: 25px;
-      padding: 15px 28px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      margin: 12px;
-    }
-
-    .ar-button:active {
-      background: #4d2676;
-    }
-
-    footer {
-      font-size: 12px;
-      padding: 15px;
+      line-height: 1.6;
+      padding: 0 18px 24px;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Kuromi AR</h1>
+    <h1>Halloween Kuromi</h1>
     <p>Meet Kuromi in your own space!</p>
   </header>
 
   <model-viewer
     id="kuromi"
     src="../halloween-kuromi.glb"
-    alt="3D Kuromi character"
+    alt="Halloween Kuromi 3D model"
     camera-controls
     touch-action="pan-y"
     auto-rotate
+    rotation-per-second="15deg"
+    camera-orbit="0deg 75deg 3.5m"
+    field-of-view="30deg"
+    scale="2.5 2.5 2.5"
     shadow-intensity="1"
     exposure="1"
-    scale="2 2 2"
-    camera-orbit="0deg 75deg 105%"
-    min-camera-orbit="auto auto 0.5m"
-    max-camera-orbit="auto auto 10m"
     ar
-    ar-modes="quick-look scene-viewer webxr"
+    ar-modes="webxr scene-viewer quick-look"
     ar-scale="auto"
     ar-placement="floor">
 
@@ -103,10 +97,10 @@
   </model-viewer>
 
   <p class="hint">
-    Drag to rotate. Pinch to zoom. Tap the AR button
-    to place Kuromi in your room.
+    Drag to rotate and pinch to zoom.
+    Tap View Kuromi in AR to place her in your room.
+    Move your phone slowly to detect the floor.
+    Pinch to resize Kuromi while in AR if supported.
   </p>
-
-  <footer>Made with love for the Kuromi AR project</footer>
 </body>
 </html>
