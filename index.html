@@ -1,109 +1,59 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Thing | 3D Viewer</title>
-  <script type="module"
-    src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js">
-  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17121d">
+  <title>Thing | 3D + AR Viewer</title>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
   <style>
     * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      color: #38235d;
-      background: linear-gradient(135deg, #ffd6ed, #d8e8ff, #e5d5ff);
-      min-height: 100vh;
-      text-align: center;
-      padding: 24px;
-    }
-
-    h1 { color: #7544bd; }
-
-    p { font-size: 17px; }
-
-    .viewer {
-      max-width: 900px;
-      margin: 24px auto;
-      padding: 18px;
-      background: white;
-      border-radius: 24px;
-      box-shadow: 0 8px 28px #7755a533;
-    }
-
-    model-viewer {
-      width: 100%;
-      height: 480px;
-      background: linear-gradient(180deg, #ffffff, #e9f6ff);
-      border-radius: 18px;
-    }
-
-    button {
-      margin: 8px;
-      padding: 13px 22px;
-      border: 0;
-      border-radius: 24px;
-      background: #7952cc;
-      color: white;
-      font-size: 15px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:hover { background: #57339d; }
-
-    #status {
-      color: #674b8d;
-      overflow-wrap: anywhere;
-    }
+    :root { color-scheme: dark; }
+    body { margin:0; min-height:100vh; padding:22px; font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color:#f8f3fb; background:radial-gradient(ellipse at top,#4b315a 0,#211927 48%,#100d14 100%); }
+    main { width:min(920px,100%); margin:0 auto; text-align:center; }
+    .eyebrow { margin-top:8px; font-size:.76rem; letter-spacing:.25em; text-transform:uppercase; color:#d8bce9; }
+    h1 { margin:10px 0 6px; font-size:clamp(2rem,7vw,4rem); letter-spacing:.04em; }
+    .intro { margin:0 auto 20px; max-width:650px; line-height:1.55; color:#e0d5e8; }
+    .panel { overflow:hidden; border:1px solid #705681; border-radius:24px; background:#17121d; box-shadow:0 18px 60px #0006; }
+    model-viewer { display:block; width:100%; height:min(62vh,620px); min-height:340px; background:radial-gradient(circle at center,#fdfcff 0,#eef5fb 70%,#e7edf5 100%); --poster-color:transparent; }
+    .ar-button { border:0; border-radius:999px; padding:14px 22px; margin:14px auto 2px; background:#7650b8; color:#fff; font-weight:750; font-size:1rem; box-shadow:0 5px 18px #0003; cursor:pointer; }
+    .ar-button:active { transform:scale(.98); }
+    .controls { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; padding:0 14px 18px; }
+    .secondary { border:1px solid #8b729a; border-radius:999px; padding:11px 17px; background:transparent; color:#f8f3fb; font-weight:650; cursor:pointer; }
+    #status { min-height:1.5em; margin:12px 10px 0; color:#d8bce9; font-size:.92rem; }
+    .help { margin:18px auto 0; max-width:680px; font-size:.88rem; line-height:1.6; color:#cfc2d8; }
+    .help strong { color:#fff; }
   </style>
 </head>
 <body>
-  <h1>Thing: My 3D Model</h1>
-  <p>Explore Thing in 3D. Drag to rotate and scroll to zoom.</p>
-
-  <div class="viewer">
-    <model-viewer
-      id="model"
-      src="./thing.glb"
-      alt="My Thing 3D model"
-      camera-controls
-      auto-rotate
-      shadow-intensity="1"
-      exposure="1"
-      environment-image="neutral"
-      loading="eager">
+<main>
+  <div class="eyebrow">A Halloween 3D experiment</div>
+  <h1>THING: 3D + AR</h1>
+  <p class="intro">Rotate the hand to explore it. On a supported phone, tap <strong>View in AR</strong> to place it in your real surroundings.</p>
+  <section class="panel">
+    <model-viewer id="hand" src="./thing.glb" alt="Thing-inspired stitched hand 3D model"
+      camera-controls auto-rotate shadow-intensity="1" exposure="1"
+      ar ar-modes="quick-look scene-viewer webxr" ar-placement="floor" ar-scale="auto"
+      loading="eager" reveal="auto">
+      <button slot="ar-button" class="ar-button">View in AR</button>
+      <div slot="poster" style="padding:32px;color:#34263b">Loading the hand model…</div>
     </model-viewer>
-
-    <p id="status">Loading Thing...</p>
-
-    <button onclick="document.querySelector('#model').cameraOrbit='0deg 75deg 105%'">
-      Reset View
-    </button>
-    <button onclick="document.querySelector('#model').cameraOrbit='0deg 90deg 105%'">
-      Front View
-    </button>
-    <button onclick="document.querySelector('#model').cameraOrbit='0deg 0deg 105%'">
-      Top View
-    </button>
-  </div>
-
-  <script>
-    const model = document.querySelector('#model');
-    const status = document.querySelector('#status');
-
-    model.addEventListener('load', () => {
-      status.textContent = 'Thing loaded successfully!';
-    });
-
-    model.addEventListener('error', () => {
-      status.textContent =
-        'Model failed to load. Check that thing.glb is a valid GLB file.';
-    });
-  </script>
+    <div class="controls">
+      <button class="secondary" id="rotate">Pause rotation</button>
+      <button class="secondary" id="reset">Reset view</button>
+    </div>
+  </section>
+  <p id="status" role="status">Loading thing.glb…</p>
+  <p class="help"><strong>On iPhone:</strong> open this published HTTPS page in Safari, then tap View in AR and follow the on-screen prompts. <strong>On Android:</strong> use Chrome on a supported ARCore device. Camera and AR availability depend on your device and browser. If you only want to inspect the model, drag to rotate and pinch/scroll to zoom.</p>
+</main>
+<script>
+  const viewer = document.querySelector('#hand');
+  const status = document.querySelector('#status');
+  const rotate = document.querySelector('#rotate');
+  viewer.addEventListener('load', () => { status.textContent = 'Hand loaded successfully. Tap View in AR on a supported phone.'; });
+  viewer.addEventListener('error', () => { status.textContent = 'Could not load thing.glb. Check that thing.glb is in the same repository folder as index.html.'; });
+  rotate.addEventListener('click', () => { viewer.autoRotate = !viewer.autoRotate; rotate.textContent = viewer.autoRotate ? 'Pause rotation' : 'Resume rotation'; });
+  document.querySelector('#reset').addEventListener('click', () => { viewer.cameraOrbit = '0deg 75deg 105%'; viewer.fieldOfView = 'auto'; viewer.autoRotate = true; rotate.textContent = 'Pause rotation'; });
+</script>
 </body>
 </html>
-
