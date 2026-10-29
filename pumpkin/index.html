@@ -3,49 +3,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Halloween Pumpkin AR</title>
 
-  <script type="module"
+  <script
+    type="module"
     src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
   </script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       text-align: center;
-      color: white;
-      background: linear-gradient(160deg, #241000, #9b4314, #180d20);
+      color: #fff7e8;
+      background: linear-gradient(160deg, #a84912, #542314, #180d20);
     }
 
     h1 {
-      padding-top: 24px;
+      margin: 0;
+      padding: 24px 12px 8px;
+      font-size: clamp(26px, 5vw, 40px);
     }
 
     p {
-      padding: 0 18px;
-      color: #ffe0b5;
+      padding: 0 16px;
+      line-height: 1.5;
     }
 
     model-viewer {
+      display: block;
       width: 100%;
       height: 65vh;
+      min-height: 320px;
       background: transparent;
+      --poster-color: transparent;
     }
 
-    .ar-button {
-      position: absolute;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 14px 22px;
-      background: #ffb347;
-      color: #241000;
-      border: 0;
-      border-radius: 24px;
-      font-weight: bold;
-      cursor: pointer;
+    .hint {
+      margin: 12px auto 28px;
     }
   </style>
 </head>
@@ -55,21 +55,56 @@
   <p>Bring a little Halloween magic into your space!</p>
 
   <model-viewer
-    src="../halloween-pumpkin.glb"
-    alt="Halloween pumpkin 3D model"
+    id="pumpkinViewer"
+    src="../halloween_pumpkin.glb"
+    alt="3D Halloween pumpkin"
     camera-controls
     auto-rotate
     ar
     ar-modes="webxr scene-viewer quick-look"
     ar-placement="floor"
-    shadow-intensity="1">
+    shadow-intensity="1"
+    exposure="1"
+    style="width: 100%; height: 65vh;">
 
-    <button class="ar-button" slot="ar-button">
+    <button
+      slot="ar-button"
+      style="
+        position: absolute;
+        bottom: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 14px 22px;
+        background: #ffb347;
+        color: #241000;
+        border: none;
+        border-radius: 24px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;">
       View Pumpkin in AR
     </button>
 
   </model-viewer>
 
-  <p>Drag to rotate, zoom to explore, or try AR on a compatible device.</p>
+  <p class="hint">
+    Drag to rotate, zoom to explore, or try AR on a compatible device.
+  </p>
+
+  <p id="status" role="status">Loading pumpkin...</p>
+
+  <script>
+    const viewer = document.getElementById("pumpkinViewer");
+    const status = document.getElementById("status");
+
+    viewer.addEventListener("load", () => {
+      status.textContent = "Pumpkin loaded successfully!";
+    });
+
+    viewer.addEventListener("error", () => {
+      status.textContent =
+        "The pumpkin could not load. Check the GLB filename and file path.";
+    });
+  </script>
 </body>
 </html>
