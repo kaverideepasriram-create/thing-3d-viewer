@@ -3,8 +3,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Halloween Kuromi AR</title>
 
   <script type="module"
@@ -25,12 +24,12 @@
     }
 
     header {
-      padding: 24px 12px 10px;
+      padding: 24px 12px 8px;
     }
 
     h1 {
       font-size: 32px;
-      margin: 8px 0 14px;
+      margin: 8px 0;
     }
 
     p {
@@ -51,7 +50,7 @@
       color: #291038;
       border: none;
       border-radius: 28px;
-      padding: 17px 26px;
+      padding: 16px 25px;
       font-size: 17px;
       font-weight: bold;
       margin: 12px;
@@ -61,7 +60,7 @@
     .hint {
       font-size: 14px;
       line-height: 1.6;
-      padding: 0 18px 24px;
+      padding-bottom: 24px;
     }
   </style>
 </head>
@@ -69,20 +68,20 @@
 <body>
   <header>
     <h1>Halloween Kuromi</h1>
-    <p>Meet Kuromi in your own space!</p>
+    <p>Bring Kuromi into your world!</p>
   </header>
 
   <model-viewer
     id="kuromi"
     src="../halloween-kuromi.glb"
-    alt="Halloween Kuromi 3D model"
+    alt="Halloween Kuromi 3D character"
     camera-controls
     touch-action="pan-y"
     auto-rotate
     rotation-per-second="15deg"
-    camera-orbit="0deg 75deg 3.5m"
-    field-of-view="30deg"
     scale="2.5 2.5 2.5"
+    camera-orbit="0deg 75deg auto"
+    field-of-view="30deg"
     shadow-intensity="1"
     exposure="1"
     ar
@@ -97,10 +96,8 @@
   </model-viewer>
 
   <p class="hint">
-    Drag to rotate and pinch to zoom.
+    Drag to rotate. Pinch to zoom.
     Tap View Kuromi in AR to place her in your room.
-    Move your phone slowly to detect the floor.
-    Pinch to resize Kuromi while in AR if supported.
   </p>
 </body>
 </html>
