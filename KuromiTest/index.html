@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Kuromi AR Test</title>
+
+  <script type="module"
+    src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      color: white;
+      background: linear-gradient(145deg, #28113f, #54266e, #160c20);
+    }
+
+    header {
+      padding: 24px 12px 8px;
+    }
+
+    h1 {
+      color: #ff65b5;
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    p {
+      color: #eadcf5;
+      padding: 0 16px;
+    }
+
+    model-viewer {
+      display: block;
+      width: 100%;
+      height: 68vh;
+      min-height: 400px;
+      --poster-color: transparent;
+    }
+
+    .ar-button {
+      background: #ff65b5;
+      color: #291038;
+      border: none;
+      border-radius: 28px;
+      padding: 16px 26px;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #status {
+      padding: 12px;
+      font-size: 14px;
+      color: #eadcf5;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Kuromi AR Test</h1>
+    <p>Meet Kuromi in your own space!</p>
+  </header>
+
+  <model-viewer
+    id="kuromi"
+    src="../Meshy_AI_Kuromi_Plushie_1029204255_texture.glb"
+    alt="Textured Kuromi 3D model"
+    camera-controls
+    auto-rotate
+    shadow-intensity="1"
+    exposure="1"
+    ar
+    ar-modes="quick-look webxr scene-viewer"
+    ar-scale="auto"
+    loading="eager">
+
+    <button slot="ar-button" class="ar-button">
+      View Kuromi in AR
+    </button>
+
+  </model-viewer>
+
+  <p id="status">Loading Kuromi...</p>
+
+  <p>
+    Drag to rotate, pinch to zoom, or tap the AR button
+    to try placing Kuromi in your room.
+  </p>
+
+  <script>
+    const model = document.getElementById("kuromi");
+    const status = document.getElementById("status");
+
+    model.addEventListener("load", () => {
+      status.textContent = "Kuromi loaded successfully!";
+    });
+
+    model.addEventListener("error", () => {
+      status.textContent =
+        "Model failed to load. Check the GLB filename and location.";
+    });
+  </script>
+</body>
+</html>
