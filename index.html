@@ -31,10 +31,24 @@
   <h1>THING: 3D + AR</h1>
   <p class="intro">Rotate the hand to explore it. On a supported phone, tap <strong>View in AR</strong> to place it in your real surroundings.</p>
   <section class="panel">
-    <model-viewer id="hand" src="./thing.glb" alt="Thing-inspired stitched hand 3D model"
-      camera-controls auto-rotate shadow-intensity="1" exposure="1"
-      ar ar-modes="quick-look scene-viewer webxr" ar-placement="floor" ar-scale="auto" scale="3 3 3"
-      loading="eager" reveal="auto">
+   
+<model-viewer
+  id="hand"
+  src="./thing.glb"
+  alt="Thing, a stitched hand model"
+  camera-controls
+  camera-orbit="0deg 75deg 2.5m"
+  field-of-view="30deg"
+  min-camera-orbit="auto auto 0.1m"
+  max-camera-orbit="auto auto 20m"
+  ar
+  ar-modes="quick-look webxr scene-viewer"
+  ar-placement="floor"
+  ar-scale="fixed"
+  scale="1 1 1"
+  loading="eager"
+  reveal="auto">
+
       <button slot="ar-button" class="ar-button">View in AR</button>
       <div slot="poster" style="padding:32px;color:#34263b">Loading the hand model…</div>
     </model-viewer>
