@@ -11,9 +11,7 @@
   </script>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -23,14 +21,9 @@
       background: linear-gradient(145deg, #28113f, #54266e, #160c20);
     }
 
-    header {
-      padding: 24px 12px 8px;
-    }
+    header { padding: 24px 12px 8px; }
 
-    h1 {
-      color: #ff65b5;
-      font-size: 32px;
-    }
+    h1 { color: #ff65b5; font-size: 32px; }
 
     model-viewer {
       display: block;
@@ -48,6 +41,7 @@
       padding: 16px 24px;
       font-size: 17px;
       font-weight: bold;
+      cursor: pointer;
     }
 
     #status {
@@ -74,12 +68,12 @@
     exposure="1"
     ar
     ar-modes="quick-look webxr scene-viewer"
-    ar-scale="auto">
+    ar-scale="auto"
+    loading="eager">
 
     <button slot="ar-button" class="ar-button">
       View Kuromi in AR
     </button>
-
   </model-viewer>
 
   <p id="status">Loading Kuromi...</p>
@@ -89,12 +83,11 @@
     const status = document.getElementById("status");
 
     model.addEventListener("load", () => {
-      status.textContent = "Kuromi loaded successfully!";
+      status.textContent = "Kuromi loaded successfully in 3D.";
     });
 
     model.addEventListener("error", () => {
-      status.textContent =
-        "Kuromi could not load. Check the filename and file path.";
+      status.textContent = "Model loading failed. Check the GLB path.";
     });
   </script>
 </body>
