@@ -7,53 +7,57 @@
 <title>Koko's Spooky World</title>
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  padding: 35px 18px;
+  min-height: 100vh;
   font-family: Arial, sans-serif;
-  background: #190f29;
-  color: white;
   text-align: center;
+  color: #fff7ff;
+  background: linear-gradient(145deg, #170d28, #321447, #170d28);
+  padding: 35px 18px;
 }
 
 h1 {
   color: #e6b5ff;
-  font-size: 32px;
-  margin-top: 35px;
+  font-size: 34px;
+  margin-bottom: 12px;
 }
 
-.subtitle {
-  color: #e4c9f5;
-  margin-bottom: 35px;
+p {
+  margin-bottom: 30px;
 }
 
 .buttons {
   max-width: 420px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-a {
+.buttons a {
   display: block;
-  background: #75419a;
+  padding: 17px;
+  border-radius: 15px;
+  background: #78409b;
   color: white;
-  padding: 19px;
-  margin: 15px 0;
-  border-radius: 14px;
   text-decoration: none;
   font-size: 18px;
   font-weight: bold;
-  transition: 0.2s;
 }
 
-a:hover {
-  background: #a65bd0;
-  transform: scale(1.03);
+.buttons a:hover {
+  background: #9659ba;
 }
 
 footer {
-  color: #cbb4dc;
-  margin-top: 40px;
+  margin-top: 35px;
   font-size: 13px;
+  color: #d8b9e8;
 }
 </style>
 </head>
@@ -61,25 +65,15 @@ footer {
 <body>
 
 <h1>Koko's Spooky World</h1>
-
-<p class="subtitle">
-Choose your magical Halloween AR adventure!
-</p>
+<p>Choose your magical Halloween AR adventure!</p>
 
 <div class="buttons">
-
-<a href="./thing/">Meet Thing</a>
-
-<a href="./ghost/">Meet the Ghost</a>
-
-<a href="./harry-potter/">Meet Harry Potter</a>
-
-<a href="./pumpkin/">Meet the Pumpkin</a>
-
-<a href="./KuromiTest/">Meet Kuromi</a>
-
-<a href="./witch/">Meet the Witch</a>
-
+  <a href="./thing/">Meet Thing</a>
+  <a href="./ghost/">Meet the Ghost</a>
+  <a href="./harry-potter/">Meet Harry Potter</a>
+  <a href="./pumpkin/">Meet the Pumpkin</a>
+  <a href="./KuromiTest/">Meet Kuromi</a>
+  <a href="./witch/">Meet the Witch</a>
 </div>
 
 <footer>
