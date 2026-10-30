@@ -1,1 +1,110 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuromi AR</title>
+
+<script type="module"
+src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js">
+</script>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(145deg,#160b24,#48205e,#210d32);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+header {
+  padding: 25px 12px 10px;
+}
+
+h1 {
+  color: #ff75c5;
+  font-size: 34px;
+}
+
+p {
+  color: #eadcf5;
+}
+
+model-viewer {
+  display: block;
+  width: 100%;
+  height: 68vh;
+  min-height: 400px;
+  background: transparent;
+  --poster-color: transparent;
+}
+
+.ar-button {
+  background: #ff65b5;
+  color: #291038;
+  border: 0;
+  border-radius: 30px;
+  padding: 16px 25px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#status {
+  padding: 15px;
+  font-size: 14px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>Kuromi AR</h1>
+  <p>Bring Kuromi into your world!</p>
+</header>
+
+<model-viewer
+  id="kuromi"
+  src="../Meshy_AI_Kuromi_Plushie_1029204255_texture.glb"
+  alt="Textured Kuromi character"
+  camera-controls
+  auto-rotate
+  rotation-per-second="15deg"
+  shadow-intensity="1"
+  exposure="1"
+  ar
+  ar-modes="quick-look webxr scene-viewer"
+  ar-scale="auto">
+
+  <button slot="ar-button" class="ar-button">
+    Meet Kuromi in AR
+  </button>
+
+</model-viewer>
+
+<p id="status">Loading Kuromi...</p>
+
+<script>
+const model = document.getElementById("kuromi");
+const status = document.getElementById("status");
+
+model.addEventListener("load", () => {
+  status.textContent = "Kuromi loaded successfully!";
+});
+
+model.addEventListener("error", () => {
+  status.textContent =
+    "Model failed to load. Check the GLB filename.";
+});
+</script>
+
+</body>
+</html>
+
