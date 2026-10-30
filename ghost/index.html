@@ -105,19 +105,25 @@
     or tap View Ghost in AR on a compatible device.
   </p>
 
-  <script>
-    const ghost = document.getElementById("ghost");
-    const status = document.getElementById("status");
+ <script>
+  const ghost = document.getElementById("ghost");
+  const status = document.getElementById("status");
 
-    ghost.addEventListener("load", () => {
-      status.textContent = "Ghost loaded successfully!";
-    });
+  function ghostLoaded() {
+    status.textContent = "Ghost loaded successfully!";
+  }
 
-    ghost.addEventListener("error", () => {
-      status.textContent =
-        "Could not load the ghost. Please check the model file.";
-    });
-  </script>
+  function ghostError() {
+    status.textContent = "Could not load the ghost. Please check the GLB file.";
+  }
+
+  if (ghost.loaded) {
+    ghostLoaded();
+  } else {
+    ghost.addEventListener("load", ghostLoaded, { once: true });
+    ghost.addEventListener("error", ghostError, { once: true });
+  }
+</script>
 
 </body>
 </html>
