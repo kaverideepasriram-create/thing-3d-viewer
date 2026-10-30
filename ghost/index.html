@@ -72,6 +72,7 @@
 </head>
 
 <body>
+
   <header>
     <h1>Cute Ghost</h1>
     <p>A little Halloween magic for your room!</p>
@@ -81,18 +82,24 @@
     Loading your ghost...
   </div>
 
- <model-viewer
-  src="../cute_ghost.glb"
-  ios-src="../cute_ghost.usdz"
-  alt="Cute Halloween ghost"
-  ar
-  ar-modes="webxr scene-viewer quick-look"
-  camera-controls
-  auto-rotate
-  camera-orbit="0deg 70deg 100%"
-orientation="0deg 0deg 90deg"
-shadow-intensity="1">
-</model-viewer>
+  <model-viewer
+    id="ghost"
+    src="../cute_ghost.glb"
+    alt="Cute Halloween ghost"
+    ar
+    ar-modes="webxr scene-viewer quick-look"
+    camera-controls
+    auto-rotate
+    camera-orbit="0deg 70deg 100%"
+    orientation="0deg 0deg 90deg"
+    shadow-intensity="1">
+
+    <button slot="ar-button" class="ar-button">
+      View Ghost in AR
+    </button>
+
+  </model-viewer>
+
   <p class="hint">
     Drag to rotate, use two fingers to zoom,
     or tap View Ghost in AR on a compatible device.
@@ -108,8 +115,9 @@ shadow-intensity="1">
 
     ghost.addEventListener("error", () => {
       status.textContent =
-        "Could not load the ghost. Check the model URL and file format.";
+        "Could not load the ghost. Please check the model file.";
     });
   </script>
+
 </body>
 </html>
