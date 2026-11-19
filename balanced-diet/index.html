@@ -26,7 +26,7 @@ main{max-width:1120px;margin:auto;padding:12px 18px 42px;display:grid;grid-templ
 .info h2{font:500 24px Georgia,serif;margin:0 0 8px}
 .intro{font-size:13px;color:var(--muted);line-height:1.55;margin:0 0 16px}
 .level{border-top:1px solid var(--line);padding:13px 0}
-.level button{width:100%;border:0;background:none;padding:0;display:flex;justify-content:space-between;align-items:center;text-align:left;font:700 14px inherit;color:var(--ink);cursor:pointer}
+.level button{width:100%;border:0;background:none;padding:0;display:flex;justify-content:space-between;align-items:center;text-align:left;font:inherit;font-weight:700;font-size:14px;color:var(--ink);cursor:pointer}
 .level button span:last-child{color:var(--muted);font-size:12px}
 .level p{display:none;margin:9px 0 0;color:var(--muted);font-size:12px;line-height:1.6}
 .level.open p{display:block}
@@ -158,8 +158,8 @@ arButton.addEventListener('click',async()=>{
   const supported=await navigator.xr.isSessionSupported('immersive-ar');
   if(!supported){say('This device or browser does not support WebXR AR. Open the 3D model in a supported Android browser to try AR.');return}
   xrSession=await navigator.xr.requestSession('immersive-ar',{optionalFeatures:['local-floor','dom-overlay'],domOverlay:{root:document.body}});
-  renderer.xr.enabled=true;await renderer.xr.setSession(xrSession);say('Move your phone slowly to find a surface, then view the pyramid in your space.');
-  xrSession.addEventListener('end',()=>{renderer.xr.enabled=false;xrSession=null});
+  renderer.xr.enabled=true;group.position.set(0,-0.25,-2.2);group.scale.setScalar(.42);await renderer.xr.setSession(xrSession);say('The pyramid is displayed in front of you. Move carefully to view it from different angles.');
+  xrSession.addEventListener('end',()=>{renderer.xr.enabled=false;group.position.set(0,0,0);group.scale.setScalar(1);xrSession=null});
  }catch(e){say('AR could not start. Check camera permission and use HTTPS in a supported browser.')}
 });
 renderer.setAnimationLoop(()=>{controls.update();renderer.render(scene,camera)});
